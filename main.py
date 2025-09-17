@@ -123,7 +123,6 @@ def english_syllable(word):
     for word in with_i:
         without_two_vowel.append(two_vowels(word))
     new_text = without_two_vowel
-
     return new_text
 
 
