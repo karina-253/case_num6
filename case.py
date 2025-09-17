@@ -49,14 +49,14 @@ def ending_e(word):
 
 
 def starting_y(word):
-    """The letter 'y' at the beginning of a word is pronounced as a consonant"""
+    """The letter 'y' at the beginning of a word is pronounced as a consonant."""
     if word[0] == 'y':
         word = 'j' + word[1:]
     return word
 
 
 def delete_u(word):
-    """Remove the letter 'u' because it is not visible in the position after G"""
+    """Remove the letter 'u' because it is not visible in the position after G."""
     i = 0
     while i < len(word) - 2:
         if word[i] == 'g' and word[i + 1] == 'u' and word[i + 2] in vowels_en:
@@ -66,7 +66,7 @@ def delete_u(word):
 
 
 def with_ld_nd(word):
-    """The following 2 functions: individual letter combinations, allocated in a separate string"""
+    """The following 2 functions: individual letter combinations, allocated in a separate string."""
     if 'ld' in word:
         word = word.replace('ld', 'lid')
     if 'nd' in word:
@@ -93,7 +93,6 @@ def two_vowels(word):
             i += 1
     return word
 
-vowels_en = ['e', 'u', 'y', 'o', 'a', 'i']
 
 def count_syllable(text):
     syllable = 0
@@ -101,10 +100,6 @@ def count_syllable(text):
         if letter in vowels_en:
             syllable += 1
     return syllable
-
-
-text = input()
-words = text.lower().split()
 
 
 def english_syllable(word):
@@ -157,8 +152,6 @@ def average_len(word):
     else:
         return count_syllable(english_syllable(text)) / len(english_syllable(text))
 
-average_sentences = count_words(text) / sentences_in_text(text)
-
 
 def flesh(text):
     """The function counts the Flush index."""
@@ -193,9 +186,9 @@ def polarity_and_objectivity(text):
     subjectivity = TextBlob(eng_text).sentiment.subjectivity
     objectivity = round((1 - subjectivity) * 100, 2)
 
-    if round(polarity) > 0:
+    if 1/3 < round(polarity) <= 1 :
         tonality = f"{lcl.POSITIVE}"
-    elif round(polarity) == 0:
+    elif -1/3 < round(polarity) <= 1/3:
         tonality = f"{lcl.NEUTRAL}"
     else:
         tonality = f"{lcl.NEGATIVE}"
@@ -212,6 +205,12 @@ def main():
     print(f"{lcl.FLASH_READABILITY_INDEX} {flesh(text)}")
     print(complexity_text(text))
     print("\n".join(polarity_and_objectivity(text)))
+
+
+text = input()
+words = text.lower().split()
+vowels_en = ['e', 'u', 'y', 'o', 'a', 'i']
+average_sentences = count_words(text) / sentences_in_text(text)
 
 
 if __name__ == '__main__':
